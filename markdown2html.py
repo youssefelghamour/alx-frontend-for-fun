@@ -6,6 +6,7 @@ import os
 
 def main():
     """ Script that takes 2 arguments """
+    
     if len(sys.argv) < 3:
         sys.stderr.write("Usage: ./markdown2html.py README.md README.html\n")
         exit(1)

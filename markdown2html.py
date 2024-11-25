@@ -10,16 +10,16 @@ def main():
     if len(sys.argv) < 3:
         sys.stderr.write("Usage: ./markdown2html.py README.md README.html\n")
         sys.exit(1)
-    else:
-        markdown_file_name = sys.argv[1]
-        output_file_name = sys.argv[2]
 
-        try:
-            with open(markdown_file_name, 'r') as f:
-                pass
-        except FileNotFoundError:
-            sys.stderr.write("Missing {}\n".format(markdown_file_name))
-            sys.exit(1)
+    markdown_file_name = sys.argv[1]
+    output_file_name = sys.argv[2]
+
+    try:
+        with open(markdown_file_name, 'r') as f:
+            pass
+    except FileNotFoundError:
+        sys.stderr.write("Missing {}\n".format(markdown_file_name))
+        sys.exit(1)
 
     sys.exit(0)
 

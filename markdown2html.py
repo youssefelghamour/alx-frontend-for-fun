@@ -14,7 +14,10 @@ def main():
         markdown_file_name = sys.argv[1]
         output_file_name = sys.argv[2]
 
-        if not os.path.exists(markdown_file_name):
+        try:
+            with open(markdown_file_name, 'r') as f:
+                pass
+        except FileNotFoundError:
             sys.stderr.write("Missing {}\n".format(markdown_file_name))
             sys.exit(1)
 

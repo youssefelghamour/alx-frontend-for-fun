@@ -2,6 +2,7 @@
 """ module for a script that takes 2 arguments """
 import sys
 import os
+import hashlib
 
 
 def main():
@@ -27,11 +28,35 @@ def main():
                 in_ol_list = False
                 # Flag for paragraph
                 in_paragraph = False
-                # Flag for bold
-                in_bold = False
+
 
                 for i in range(len(content)):
                     line = content[i]
+
+                    start_index = None
+                    end_index = None
+                    
+                    # Process for ((content))
+                    if '((' in line and '))' in line:
+                        start_index = line.find('((')
+                        # Looking for )) starting from the position start_index
+                        end_index = line.find('))', start_index)
+                        # Extract the substring (between (( )) ) and apply the replacement
+                        substr = line[start_index + 2:end_index]
+                        # Remove all 'c' & 'C' characters
+                        substr = substr.replace('c', '').replace('C', '')
+                        # Replace the original substring with the modified one
+                        line = line[:start_index] + substr + line[end_index + 2:]
+
+                    # Process for [[content]]
+                    if '[[' in line and ']]' in line:
+                        start_index = line.find('[[')
+                        end_index = line.find(']]', start_index)
+                        substr = line[start_index + 2:end_index]
+                        # Covert substring to MD5 hash
+                        md5_hash = hashlib.md5(substr.encode()).hexdigest()
+                        line = line[:start_index] + md5_hash + line[end_index + 2:]
+
 
                     # the third argument 1 is to replace only one occurence, otherwise  the replace will replace all the ** on the line
                     # Replace the first  ** with the opening bold tag

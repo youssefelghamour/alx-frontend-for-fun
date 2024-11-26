@@ -33,15 +33,16 @@ def main():
                 for i in range(len(content)):
                     line = content[i]
 
+                    # the third argument 1 is to replace only one occurence, otherwise  the replace will replace all the ** on the line
                     # Replace the first  ** with the opening bold tag
-                    line = line.replace('**', '<b>')
+                    line = line.replace('**', '<b>', 1)
                     # Replace the second ** with the closing bold tag
-                    line = line.replace('**', '</b>')
+                    line = line.replace('**', '</b>', 1)
 
                     # Replace the first  __ with the opening emphasis tag
-                    line = line.replace('__', '<em>')
+                    line = line.replace('__', '<em>', 1)
                     # Replace the second __ with the closing emphasis tag
-                    line = line.replace('__', '</em>')
+                    line = line.replace('__', '</em>', 1)
 
                     # Handle headings
                     if line.startswith('#'):

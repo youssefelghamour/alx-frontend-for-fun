@@ -25,12 +25,25 @@ def main():
                 in_ul_list = False
                 # Flag for ordered list
                 in_ol_list = False
+                # Flag for paragraph
                 in_paragraph = False
+                # Flag for bold
+                in_bold = False
 
                 for i in range(len(content)):
                     line = content[i]
 
-                    # HAndle headings
+                    # Replace the first  ** with the opening bold tag
+                    line = line.replace('**', '<b>')
+                    # Replace the second ** with the closing bold tag
+                    line = line.replace('**', '</b>')
+
+                    # Replace the first  __ with the opening emphasis tag
+                    line = line.replace('__', '<em>')
+                    # Replace the second __ with the closing emphasis tag
+                    line = line.replace('__', '</em>')
+
+                    # Handle headings
                     if line.startswith('#'):
                         # count the number of # symbols
                         level = line.count('#')

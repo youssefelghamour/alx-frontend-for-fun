@@ -23,28 +23,17 @@ def main():
             with open(output_file_name, "w") as output_file:
 
                 for line in content:
-                    # split the line into a list of words
-                    words = line.split()
+                    # Check for heading syntax and write corresponding HTML tag
+                    if line.startswith('#'):
+                        # count the number of # symbols
+                        level = line.count('#')
 
-                    # create opening and closing tag base on the markdwon title syntax
-                    if words[0] == "#":
-                        html_tag = ["<h1>", "</h1>\n"]
-                    elif words[0] == "##":
-                        html_tag = ["<h2>", "</h2>\n"]
-                    elif words[0] == "###":
-                        html_tag = ["<h3>", "</h3>\n"]
-                    elif words[0] == "####":
-                        html_tag = ["<h4>", "</h4>\n"]
-                    elif words[0] == "#####":
-                        html_tag = ["<h5>", "</h5>\n"]
-                    elif words[0] == "######":
-                        html_tag = ["<h6>", "</h6>\n"]
+                        # remove the #s and extra spaces
+                        heading_text = line.strip('#').strip()
 
-                    # convert the line title into html
-                    line = html_tag[0] + " ".join(words[1:]) + html_tag[1]
-                    
-                    # add the formated html line into it
-                    output_file.write(line)
+                        html_tag = f"<h{level}>{heading_text}</h{level}>"
+                        
+                        output_file.write(html_tag + '\n')
 
     except FileNotFoundError:
         sys.stderr.write("Missing {}\n".format(markdown_file_name))

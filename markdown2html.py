@@ -21,8 +21,12 @@ def main():
 
             # create and open the output file
             with open(output_file_name, "w") as output_file:
+                # Flag for unordered list
+                in_list = False
 
-                for line in content:
+                for i in range(len(content)):
+                    line = content[i]
+
                     # Check for heading syntax and write corresponding HTML tag
                     if line.startswith('#'):
                         # count the number of # symbols
@@ -32,8 +36,27 @@ def main():
                         heading_text = line.strip('#').strip()
 
                         html_tag = f"<h{level}>{heading_text}</h{level}>"
-                        
+
                         output_file.write(html_tag + '\n')
+                    # Check for list items
+                    elif line.startswith('-'):
+                        if not in_list:
+                            output_file.write("<ul>\n")
+                            in_list = True
+                        list_item = line.strip('-').strip()
+                        output_file.write(f"\t<li>{list_item}</li>\n")
+                    else:
+                        # Close <ul> if not in a list item anymore
+                        if in_list:
+                            output_file.write("</ul>\n")
+                            in_list = False
+
+                # Close <ul> at the end of the file if still open
+                if in_list:
+                    output_file.write("</ul>\n")
+                                                
+                        
+
 
     except FileNotFoundError:
         sys.stderr.write("Missing {}\n".format(markdown_file_name))

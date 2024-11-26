@@ -1,12 +1,27 @@
 #!/usr/bin/python3
-""" module for a script that takes 2 arguments """
+""" module for a script that converts from markdown to html """
 import sys
 import os
 import hashlib
 
 
 def main():
-    """ Script that takes 2 arguments """
+    """ Script that takes an input markdown file and converts it to HTML, writing the result to an HTML file
+    
+        The conversion can be done automatically with the markdown library:
+        import markdown
+
+        # Read the markdown file
+        with open('README.md', 'r') as input_file:
+            markdown_text = input_file.read()
+
+        # Convert markdown to HTML
+        html_output = markdown.markdown(markdown_text)
+
+        # Write HTML output to a file
+        with open('README.html', 'w') as output_file:
+            output_file.write(html_output)
+    """
     
     if len(sys.argv) < 3:
         sys.stderr.write("Usage: ./markdown2html.py README.md README.html\n")

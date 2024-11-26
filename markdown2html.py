@@ -22,7 +22,10 @@ def main():
             # create and open the output file
             with open(output_file_name, "w") as output_file:
                 # Flag for unordered list
-                in_list = False
+                in_ul_list = False
+
+                # Flag for ordered list
+                in_ol_list = False
 
                 for i in range(len(content)):
                     line = content[i]
@@ -38,22 +41,39 @@ def main():
                         html_tag = f"<h{level}>{heading_text}</h{level}>"
 
                         output_file.write(html_tag + '\n')
-                    # Check for list items
+                    # Check for ul list items
                     elif line.startswith('-'):
-                        if not in_list:
+                        if not in_ul_list:
                             output_file.write("<ul>\n")
-                            in_list = True
+                            in_ul_list = True
                         list_item = line.strip('-').strip()
+                        output_file.write(f"\t<li>{list_item}</li>\n")
+                    
+                    else:
+                        # Close <ul> if not in a list item anymore
+                        if in_ul_list:
+                            output_file.write("</ul>\n")
+                            in_ul_list = False
+                    
+                    # Check for ol list items
+                    if line.startswith('*'):
+                        if not in_ol_list:
+                            output_file.write("<ol>\n")
+                            in_ol_list = True
+                        list_item = line.strip('*').strip()
                         output_file.write(f"\t<li>{list_item}</li>\n")
                     else:
                         # Close <ul> if not in a list item anymore
-                        if in_list:
-                            output_file.write("</ul>\n")
-                            in_list = False
+                        if in_ol_list:
+                            output_file.write("</ol>\n")
+                            in_ol_list = False
 
                 # Close <ul> at the end of the file if still open
-                if in_list:
+                if in_ul_list:
                     output_file.write("</ul>\n")
+                # Close <ul> at the end of the file if still open
+                elif in_ol_list:
+                    output_file.write("</ol>\n")
                                                 
                         
 

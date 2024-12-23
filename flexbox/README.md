@@ -1,1 +1,3 @@
 # Flexbox
+
+This project demonstrates the power of CSS Flexbox for creating a responsive and flexible homepage layout. The layout includes various sections such as Services, Works, About Us, and Latest News, all arranged using Flexbox to ensure optimal display across different screen sizes. It focuses on mastering Flexbox concepts like container and item properties, alignment, and layout creation without the need for floats or traditional positioning.

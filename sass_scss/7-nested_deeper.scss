@@ -1,0 +1,17 @@
+/* A Sass file that assigns font sizes to HTML elements */
+
+$body-font-size: 14px;
+$h1-font-size: 16px;
+$smaller-font-size: 12px;
+
+body {
+    font-size: $body-font-size;
+
+    h1 {
+        font-size: $h1-font-size;
+
+        &.smaller {
+            font-size: $smaller-font-size;
+        }
+    }
+}

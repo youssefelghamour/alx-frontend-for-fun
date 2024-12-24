@@ -1,0 +1,12 @@
+/* A Sass file that assigns text colors to buttons */
+
+$color: #FF0000;
+$hover-color: #00FF00;
+
+button {
+    color: $color;
+
+    &:hover {
+        color: $hover-color;
+    }
+}

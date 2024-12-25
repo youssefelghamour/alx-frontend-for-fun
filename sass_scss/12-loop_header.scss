@@ -1,0 +1,7 @@
+/* A Sass file generating h1 to h5 tags with font sizes matching their numbers, using @for */
+
+@for $i from 1 through 5 {
+    h#{$i} {
+        font-size: #{$i}px;
+    }
+}
